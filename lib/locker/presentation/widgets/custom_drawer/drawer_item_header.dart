@@ -12,47 +12,55 @@ class DrawerItems extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final provider = Provider.of<LockerProvider>(context);
     return ListView.builder(
-      shrinkWrap: true,
-      itemCount: provider.selectedItem.keys.toList().length,
-      itemBuilder: (context, index) {
-        provider.selectedItem.forEach((key, value) {
-          if (key == provider.selectedItem.keys.toList()[index]) {
-            if (value.length > 1) {
-              return Exp;
-            } else{
-              return ListTile(
-                  title: Text(
-                  provider.selectedItem.keys.toList()[index],
-          style: textTheme.bodyLarge?.copyWith(
-          color: Colors.white,
-          ),
-          ),);
-            }
-          }
-        });
-      }
-          ListTile(
-        title: Text(
-          provider.selectedItem.keys.toList()[index],
-          style: textTheme.bodyLarge?.copyWith(
-            color: Colors.white,
-          ),
-        ),
-        onTap: () {
+        shrinkWrap: true,
+        itemCount: provider.selectedItem.keys.toList().length,
+        itemBuilder: (context, index) {
+          bool isExpanded = false;
           provider.selectedItem.forEach((key, value) {
             if (key == provider.selectedItem.keys.toList()[index]) {
               if (value.length > 1) {
-                showPopupMenu(context,
-                    provider.selectedItem.keys.toList()[index], provider);
+                isExpanded = true;
               } else {
-                provider.selectedPage =
-                    provider.selectedItem.keys.toList()[index];
-                context.pop();
+                isExpanded = false;
               }
             }
           });
-        },
-      ),
-    );
+         return (isExpanded)
+              ? ExpansionTile(
+                  title: Text(
+                    provider.selectedItem.keys.toList()[index],
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                  children: [
+                    for (var i in provider.getSubPages(provider.selectedItem.keys.toList()[index]))
+                      ListTile(
+                        title: Text(
+                          i,
+                          style: textTheme.bodyLarge?.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                        onTap: () {
+                          provider.selectedPage = i;
+                          context.pop();
+                        },
+                      )
+                  ],
+                )
+              : ListTile(
+                  title: Text(
+                    provider.selectedItem.keys.toList()[index],
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    provider.selectedPage =
+                        provider.selectedItem.keys.toList()[index];
+                    context.pop();
+                  });
+        });
   }
 }
