@@ -9,12 +9,9 @@ class NavigationBarr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ScreenTypeLayout(
-        mobile: NavigationBarMobile(),
-        tablet: NavigationBarDesktop(),
-      ),
+    return ScreenTypeLayout(
+      mobile: NavigationBarMobile(),
+      tablet: NavigationBarDesktop(),
     );
   }
 }

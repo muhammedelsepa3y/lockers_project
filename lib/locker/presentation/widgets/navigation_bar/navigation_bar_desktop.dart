@@ -1,74 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:locker_app/locker/presentation/widgets/navigation_bar/search_field.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/route_constants.dart';
+import '../../providers/locker_provider.dart';
 import 'navbar_item.dart';
 import 'navbar_logo.dart';
 
 class NavigationBarDesktop extends StatelessWidget {
    NavigationBarDesktop({super.key});
-  TextEditingController searchController = TextEditingController();
-  List<NavBarItem> navBarItems = [
-    NavBarItem('Topic 1', "topic 1"),
-    NavBarItem('Topic 2', "topic 2"),
-    NavBarItem('Topic 3', "topic 3"),
-    NavBarItem('Topic 4', "topic 4"),
-  ];
+
+
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<LockerProvider>(context);
     return Container(
       padding: EdgeInsets.all( 2.h),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(5),
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
-      height: 20.h,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           const NavbarLogo(),
+          Row(
 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-
-            children: [
+            children:[
               Container(
-                height: 5.h,
+                height: 25,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemBuilder:(context,index)=> navBarItems[index],
-                    separatorBuilder: (context,index)=>SizedBox(width: 5.w,),
-                    itemCount: navBarItems.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context,index)=> NavBarItem(title: provider.selectedItem.keys.toList()[index]),
+                  separatorBuilder: (context,index)=>SizedBox(width: 3.w,),
+                  itemCount:  provider.selectedItem.keys.toList().length,
                 ),
               ),
-              SizedBox(
-                width: 17.w,
-                height: 6.h,
-
-
-                child: TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    hintText: "Search",
-                    contentPadding: EdgeInsets.all(10),
-                    isCollapsed: true,
-
-                    suffixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-
-                  ),
-
-                ),
-              )
-
-            ],
+              SearchBarr()
+            ]
           )
+
+
         ],
       ),
     );

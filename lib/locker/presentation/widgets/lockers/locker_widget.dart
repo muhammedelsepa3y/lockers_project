@@ -8,24 +8,84 @@ class LockerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.topCenter,
-      padding: EdgeInsets.all( 2.h),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(5),
+    return Card(
+      elevation: 20,
+      borderOnForeground: true,
+      shadowColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
-
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text("Id: ${locker.id}"),
-          Text("Location: ${locker.location}"),
-          Text("# Cells: ${locker.numberOfCells}"),
-          Text(locker.reservationMode.name+" Reservation Mode")
+          Container(
+            height: 30.h ,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('images/background.jpg'),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top:15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Locker ID: ${locker.id}',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w200, // Set font weight to 200
+                    color: Colors.black,
+
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Text(
+                  'Locker Location: ${locker.location}',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w200, // Set font weight to 200
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Text(
+                  'Number of Cells: ${locker.numberOfCells}',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w200, // Set font weight to 200
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Text(
+                  '${locker.reservationMode.name} Reservation Mode',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w200, // Set font weight to 200
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
+
   }
 }

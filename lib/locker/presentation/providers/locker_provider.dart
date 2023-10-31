@@ -7,7 +7,6 @@ import 'package:locker_app/core/error/custom_err.dart';
 import 'package:locker_app/core/utils/route_constants.dart';
 import 'package:locker_app/locker/domain/entities/locker.dart';
 import 'package:locker_app/locker/domain/usecases/get_lockers_list.dart';
-import 'package:locker_app/locker/presentation/widgets/dashboard_bar/dashboard_bar.dart';
 
 import '../../../core/usecase/base_usecase.dart';
 import '../../../core/utils/enums.dart';
@@ -19,6 +18,7 @@ import '../widgets/lockers/add_locker.dart';
 import '../widgets/lockers/manage_locker.dart';
 import '../widgets/lockers/view_locker.dart';
 import '../widgets/manage/manage_home.dart';
+import '../widgets/navigation_bar/navbar_item.dart';
 import '../widgets/users/users_home.dart';
 
 
@@ -46,21 +46,21 @@ class LockerProvider extends ChangeNotifier {
   String _selectedSubPageText="Add Locker";
   String get selectedSubPageText => _selectedSubPageText;
   Widget _selectedSubPage = AddLocker();
-
-
+  String _selectedMainPageTemp="Lockers";
+  set selectedMainPageTemp(String page) {_selectedMainPageTemp = page;}
 
   set selectedPage(String page) {
     bool isFound = false;
     _selectedItem.forEach((key, value) {
       if (key == page) {
-        _selectedSubPage = value[0].values.first;
         _selectedMainPage = key;
-        _selectedSubPageText=value[0].keys.first;
+        _selectedSubPage = value[0].values.first;
         isFound = true;
       }
     });
     if (!isFound) {
-      _selectedItem[_selectedMainPage].forEach((element) {
+
+      _selectedItem[_selectedMainPageTemp].forEach((element) {
         if (element.keys.first == page) {
           _selectedSubPage = element.values.first;
           _selectedSubPageText=element.keys.first;
@@ -71,9 +71,9 @@ class LockerProvider extends ChangeNotifier {
   }
   Widget get selectedSubPage => _selectedSubPage;
 
-  List<String> getSubPages (){
+  List<String> getSubPages (String main){
     List <String> subPages=[];
-     _selectedItem[_selectedMainPage].forEach((element) {
+     _selectedItem[main].forEach((element) {
         subPages.add(element.keys.first);
      });
      return subPages;

@@ -15,7 +15,7 @@ class CustomDrawer extends StatelessWidget {
       width: 65.w,
       height: 100.h,
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Colors.black,
         boxShadow: [
           BoxShadow(color: Colors.black12, blurRadius: 16),
         ],

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:locker_app/locker/presentation/providers/locker_provider.dart';
 import 'package:provider/provider.dart';
@@ -6,9 +8,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../widgets/centered_view/centered_view.dart';
 import '../../widgets/custom_drawer/custom_drawer.dart';
-import '../../widgets/dashboard_bar/dashboard_bar.dart';
 import '../../widgets/navigation_bar/navigation_bar.dart';
-import '../../widgets/sub_dashboard_bar/sub_dashboard_bar.dart';
 import 'page_content.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,29 +17,34 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider=Provider.of<LockerProvider>(context);
+    bool isMobile = SizerUtil.deviceType == DeviceType.mobile;
     return ResponsiveBuilder(
       builder: (context, sizingInformation) {
         return Scaffold(
-          drawer: sizingInformation.deviceScreenType == DeviceScreenType.mobile
+          drawer: (isMobile)
               ? const CustomDrawer()
               : null,
-          body: CenteredView(
-            child: ListView(
-              children: [
-                NavigationBarr(),
-                DashboardBar(),
-                Row(
+
+          body: Stack(
+            children: [
+              Image.asset(
+                "images/background.jpg",
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 100.h,
+              ),
+              SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: Column(
                   children: [
-                    SubDashboardBar(),
-                    Expanded(child: PageContent()),
-
-
+                    NavigationBarr(),
+                    CenteredView(
+                      child: PageContent()
+                    ),
                   ],
-                )
-
-
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
         );
       },

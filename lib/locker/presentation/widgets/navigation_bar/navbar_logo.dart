@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:locker_app/core/utils/app_assets.dart';
 import 'package:sizer/sizer.dart';
 
 class NavbarLogo extends StatelessWidget {
@@ -7,17 +9,19 @@ class NavbarLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Container(
-      padding: EdgeInsets.all(1.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black, width: 1),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Text(
-        "IMBoX LMS",
-        style: textTheme.headlineMedium,
-      ),
+    return Row(
+      children: [
+        Image.asset(AppAssets.logo, height: 25,color: Colors.white,),
+        SizedBox(
+          width: 1.w,
+        ),
+        Text(
+          "IMBoX LMS",
+          style: textTheme.headlineMedium?.copyWith(
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }

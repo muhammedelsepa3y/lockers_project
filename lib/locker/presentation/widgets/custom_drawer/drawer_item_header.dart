@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/locker_provider.dart';
 import 'drawer_subitem.dart';
 
 class DrawerItemHeader extends StatelessWidget {
@@ -10,6 +12,7 @@ class DrawerItemHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final provider = Provider.of<LockerProvider>(context);
     return ExpansionTile(
       title: Text(
         title,
@@ -23,7 +26,8 @@ class DrawerItemHeader extends StatelessWidget {
               style: textTheme.bodyMedium,
             ),
             onTap: () {
-              context.pushReplacement(subItem.route);
+              provider.selectedPage = subItem.title;
+              provider.selectedMainPageTemp=title;
             },
           ),
       ],

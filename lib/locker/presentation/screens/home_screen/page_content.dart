@@ -13,11 +13,8 @@ class PageContent extends StatelessWidget {
       alignment: Alignment.center,
       margin: EdgeInsets.all(8),
       padding: EdgeInsets.all( 2.h),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 58.h,
+
+      height: 540,
       child: provider.selectedSubPage,
     );
   }

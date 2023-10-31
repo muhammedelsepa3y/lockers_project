@@ -17,13 +17,12 @@ class LockerRemoteDataSource implements BaseLockerRemoteDataSource {
   @override
   Future<void> addLocker(LockerParams params) async {
     try {
-
       await firestore.collection('lockers').add(LockerModel(
-        id: params.id,
-        location: params.location,
-        numberOfCells: params.numberOfCells,
-        reservationMode: params.reservationMode,
-      ).toJson());
+            id: params.id,
+            location: params.location,
+            numberOfCells: params.numberOfCells,
+            reservationMode: params.reservationMode,
+          ).toJson());
     } catch (e) {
       throw CustomError(e.toString());
     }
@@ -31,13 +30,14 @@ class LockerRemoteDataSource implements BaseLockerRemoteDataSource {
 
   @override
   Future<List<LockerModel>> getLockers() async {
-
-
     try {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('lockers').get();
-      List<LockerModel> lockersList = querySnapshot.docs.map((doc) => LockerModel.fromJson(doc.data() as Map<String, dynamic>)).toList();
+      QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('lockers').get();
+      List<LockerModel> lockersList = querySnapshot.docs
+          .map(
+              (doc) => LockerModel.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
       return lockersList;
-
     } catch (e) {
       throw CustomError(e.toString());
     }
