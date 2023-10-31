@@ -17,11 +17,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider=Provider.of<LockerProvider>(context);
-    bool isMobile = SizerUtil.deviceType == DeviceType.mobile;
     return ResponsiveBuilder(
       builder: (context, sizingInformation) {
         return Scaffold(
-          drawer: (isMobile)
+          drawer: (SizerUtil.deviceType == DeviceType.mobile)
               ? const CustomDrawer()
               : null,
 
