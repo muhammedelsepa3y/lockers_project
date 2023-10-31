@@ -25,35 +25,10 @@ class CustomDrawer extends StatelessWidget {
           children: <Widget>[
             const CustomDrawerHeader(),
             SizedBox(height: 10.h),
-            const DrawerItemHeader(
-              title: 'Dashboard',
-              subItems: [],
+             DrawerItems(
+
             ),
-            const DrawerItemHeader(
-              title: 'Users',
-              subItems: [],
-            ),
-            DrawerItemHeader(
-              title: 'Lockers',
-              subItems: [
-                DrawerSubItem(
-                  title: 'Add Locker',
-                  route: homeRoute,
-                ),
-                DrawerSubItem(
-                  title: 'Manage Lockers',
-                  route: homeRoute,
-                ),
-                DrawerSubItem(
-                  title: 'View Lockers',
-                  route: homeRoute,
-                ),
-              ],
-            ),
-            const DrawerItemHeader(
-              title: 'Manage',
-              subItems: [],
-            ),
+
           ],
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../providers/locker_provider.dart';
 import '../custom_drawer/drawer_subitem.dart';
+import 'show_popup_menu.dart';
 
 class NavBarItem extends StatelessWidget {
   final String title;
@@ -21,7 +22,7 @@ class NavBarItem extends StatelessWidget {
         provider.selectedItem.forEach((key, value) {
           if (key == title) {
             if (value.length > 1)
-              showPopupMenu(context, provider);
+              showPopupMenu(context,title, provider);
             else
               provider.selectedPage = title;
           }
@@ -41,33 +42,5 @@ class NavBarItem extends StatelessWidget {
     );
   }
 
-  void showPopupMenu(BuildContext context, LockerProvider provider) {
-    final RenderBox button = context.findRenderObject() as RenderBox;
-    final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
-    final Offset position =
-        button.localToGlobal(Offset.zero, ancestor: overlay);
 
-    showMenu(
-      context: context,
-      position: RelativeRect.fromLTRB(
-        position.dx,
-        position.dy + button.size.height,
-        position.dx + button.size.width,
-        position.dy + button.size.height + 10.0, // Adjust the offset as needed
-      ),
-      items: <PopupMenuEntry<String>>[
-        for (var i in provider.getSubPages(title))
-          PopupMenuItem<String>(
-            value: i,
-            child: Text(i),
-          ),
-      ],
-    ).then<void>((String? selected) {
-      if (selected != null && selected.isNotEmpty) {
-        provider.selectedMainPageTemp = title;
-        provider.selectedPage = selected;
-      }
-    });
-  }
 }

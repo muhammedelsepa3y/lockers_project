@@ -59,7 +59,6 @@ class LockerProvider extends ChangeNotifier {
       }
     });
     if (!isFound) {
-
       _selectedItem[_selectedMainPageTemp].forEach((element) {
         if (element.keys.first == page) {
           _selectedSubPage = element.values.first;
