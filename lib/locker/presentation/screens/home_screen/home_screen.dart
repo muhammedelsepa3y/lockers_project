@@ -16,11 +16,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider=Provider.of<LockerProvider>(context);
     return ResponsiveBuilder(
       builder: (context, sizingInformation) {
         return Scaffold(
-          drawer: (SizerUtil.deviceType == DeviceType.mobile)
+          drawer: (sizingInformation.deviceScreenType == DeviceScreenType.mobile)
               ? const CustomDrawer()
               : null,
 
@@ -33,7 +32,6 @@ class HomeScreen extends StatelessWidget {
                 height: 100.h,
               ),
               SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
                 child: Column(
                   children: [
                     NavigationBarr(),
