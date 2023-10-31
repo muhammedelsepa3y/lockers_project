@@ -18,7 +18,7 @@ class CustomInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme=Theme.of(context).textTheme;
     return Container(
-      width: 20.w,
+      width: 40.w,
 
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,7 +28,7 @@ class CustomInputField extends StatelessWidget {
             style:textTheme.bodyMedium,
           ),
           SizedBox(
-            width: 12.w,
+            width: 18.w,
             height: 5.h,
             child: TextField(
               onSubmitted:
@@ -46,7 +46,7 @@ class CustomInputField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5.0),
                 ),
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10.0,
+                  horizontal: 0,
                   vertical: 8.0,
                 ),
               ),
