@@ -28,7 +28,7 @@ class CustomInputField extends StatelessWidget {
             style:textTheme.bodyMedium,
           ),
           SizedBox(
-            width: 18.w,
+            width: 16.w,
             height: 5.h,
             child: TextField(
               onSubmitted:
