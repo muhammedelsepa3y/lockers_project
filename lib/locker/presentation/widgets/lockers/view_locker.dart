@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../providers/locker_provider.dart';
+import '../shared/custom_button.dart';
+import '../shared/page_title.dart';
 import 'locker_widget.dart';
 
 class ViewLocker extends StatelessWidget {
@@ -31,33 +33,25 @@ class ViewLocker extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.center,
-                child: Text(
-                  'View Locker',
-                  style: textTheme.displayMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: Colors.black,
-                  ),
-                ),
+                child: PageTitle(title: 'View Locker'),
               ),
               SizedBox(
-                height: 1.h,
+                height: 8.h,
               ),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(child: Text("Scan the network and list below the found locker IDs",maxLines: 2,overflow: TextOverflow.ellipsis,style: textTheme.bodySmall,textAlign: TextAlign.center,)),
+                  Flexible(child: Text("Scan the network and list below the found locker IDs",maxLines: 2,overflow: TextOverflow.ellipsis,style: textTheme.bodySmall,textAlign: TextAlign.center,)),
                   SizedBox(width: 1.w,),
-                  ElevatedButton(
-                      onPressed: () async{
-                        await provider.getLockers(context);
-                      },
-                      child: Text('Scan')),
+                  CustomButton(title: "Scan",onPressed: ()async{
+                    await provider.getLockers(context);
+                  },),
                 ],
               ),
               SizedBox(
-                height: 1.h,
+                height: 2.h,
               ),
               LayoutBuilder(
                 builder: (context, constraints) {
